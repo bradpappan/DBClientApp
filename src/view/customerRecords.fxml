@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="548.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.CustomerRecords">
+   <children>
+      <TableView layoutX="36.0" layoutY="131.0" prefHeight="286.0" prefWidth="881.0">
+        <columns>
+          <TableColumn fx:id="customerId" prefWidth="88.0" text="Customer_ID" />
+          <TableColumn fx:id="customerName" prefWidth="99.0" text="Customer_Name" />
+            <TableColumn fx:id="customerAddress" prefWidth="77.0" text="Address" />
+            <TableColumn fx:id="customerPostalCode" prefWidth="88.0" text="Postal_Code" />
+            <TableColumn fx:id="customerPhone" prefWidth="88.0" text="Phone" />
+            <TableColumn fx:id="customerCreateDate" prefWidth="88.0" text="Create_Date" />
+            <TableColumn fx:id="customerCreatedBy" prefWidth="88.0" text="Created_By" />
+            <TableColumn fx:id="customerLastUpdate" prefWidth="88.0" text="Last_Update" />
+            <TableColumn fx:id="customerLastUpdateBy" prefWidth="101.0" text="Last_Updated_By" />
+            <TableColumn fx:id="customerDivisionId" prefWidth="75.0" text="Division_ID" />
+        </columns>
+      </TableView>
+      <Label layoutX="36.0" layoutY="14.0" prefHeight="37.0" prefWidth="144.0" text="Customer Records">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="addCustomerHandler" layoutX="603.0" layoutY="427.0" mnemonicParsing="false" text="Add Customer" />
+      <Button fx:id="deleteCustomerHandler" layoutX="711.0" layoutY="427.0" mnemonicParsing="false" text="Delete Customer" />
+      <Button fx:id="editCustomerHandler" layoutX="826.0" layoutY="427.0" mnemonicParsing="false" text="Edit Customer" />
+   </children>
+</AnchorPane>
