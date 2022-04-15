@@ -7,10 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="520.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AppointmentSchedules">
    <children>
-      <TableView layoutX="29.0" layoutY="123.0" prefHeight="274.0" prefWidth="856.0">
+      <TableView fx:id="appointmentSchedulesTable" layoutX="29.0" layoutY="123.0" prefHeight="274.0" prefWidth="856.0">
         <columns>
           <TableColumn prefWidth="109.0" text="Appointment_ID" />
           <TableColumn prefWidth="65.0" text="Title" />

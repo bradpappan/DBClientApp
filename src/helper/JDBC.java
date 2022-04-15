@@ -2,7 +2,7 @@ package helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public abstract class JDBC {
+public class JDBC {
 
 
         private static final String protocol = "jdbc";
@@ -12,7 +12,7 @@ public abstract class JDBC {
         private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // LOCAL
         private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
         private static final String userName = "sqlUser"; // Username
-        private static String password = "Passw0rd!"; // Password
+        private static final String password = "Passw0rd!"; // Password
         public static Connection connection;  // Connection Interface
 
         public static void openConnection()
@@ -38,6 +38,9 @@ public abstract class JDBC {
                 System.out.println("Error:" + e.getMessage());
             }
         }
+
+
+
     }
 
 
