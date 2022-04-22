@@ -6,13 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginPageController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
    <children>
-      <TextField fx:id="username" layoutX="226.0" layoutY="175.0" promptText="Enter username" />
-      <TextField fx:id="password" layoutX="226.0" layoutY="213.0" promptText="Enter Password" />
-      <Button fx:id="loginHandler" layoutX="274.0" layoutY="250.0" mnemonicParsing="false" onAction="#attemptLogin" text="Login" />
-      <Label fx:id="zoneIdHandler" layoutX="512.0" layoutY="361.0" prefHeight="25.0" prefWidth="74.0" text="Timezone" />
+      <TextField fx:id="usernameTf" layoutX="226.0" layoutY="175.0" promptText="Enter username" />
+      <TextField fx:id="passwordTf" layoutX="226.0" layoutY="213.0" promptText="Enter Password" />
+      <Button fx:id="loginBtn" layoutX="274.0" layoutY="250.0" mnemonicParsing="false" text="Login" />
+      <Label fx:id="zoneIdLbl" layoutX="449.0" layoutY="361.0" prefHeight="25.0" prefWidth="137.0" text="Timezone">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
       <Label layoutX="223.0" layoutY="89.0" prefHeight="66.0" prefWidth="149.0" text="Welcome" textAlignment="CENTER">
          <font>
             <Font size="35.0" />

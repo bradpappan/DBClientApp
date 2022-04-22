@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="520.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AppointmentSchedules">
+<AnchorPane prefHeight="633.0" prefWidth="1044.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.appointmentsController">
    <children>
-      <TableView fx:id="appointmentSchedulesTable" layoutX="29.0" layoutY="123.0" prefHeight="274.0" prefWidth="856.0">
+      <TableView fx:id="appointmentSchedulesTable" layoutX="29.0" layoutY="123.0" prefHeight="326.0" prefWidth="988.0">
         <columns>
-          <TableColumn prefWidth="109.0" text="Appointment_ID" />
-          <TableColumn prefWidth="65.0" text="Title" />
-            <TableColumn prefWidth="87.0" text="Description" />
-            <TableColumn prefWidth="74.0" text="Location" />
-            <TableColumn prefWidth="66.0" text="Contact" />
-            <TableColumn prefWidth="71.0" text="Type" />
-            <TableColumn prefWidth="104.0" text="Start" />
-            <TableColumn prefWidth="103.0" text="End" />
-            <TableColumn prefWidth="102.0" text="Customer_ID" />
-            <TableColumn prefWidth="74.0" text="User_ID" />
+          <TableColumn fx:id="appointmentIdColumn" prefWidth="109.0" text="Appointment_ID" />
+          <TableColumn fx:id="appointmentTitleColumn" prefWidth="71.0" text="Title" />
+            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="93.0" text="Description" />
+            <TableColumn fx:id="appointmentLocationColumn" prefWidth="82.0" text="Location" />
+            <TableColumn fx:id="appointmentTypeColumn" prefWidth="102.0" text="Type" />
+            <TableColumn fx:id="appointmentStartColumn" prefWidth="92.0" text="Start" />
+            <TableColumn fx:id="appointmentEndColumn" prefWidth="116.0" text="End" />
+            <TableColumn fx:id="appointmentCustomerIdColumn" prefWidth="124.0" text="Customer_ID" />
+            <TableColumn fx:id="appointmentUserIdColumn" prefWidth="92.0" text="User_ID" />
+            <TableColumn fx:id="appointmentContactIdColumn" prefWidth="106.0" text="Contact_ID" />
         </columns>
       </TableView>
       <Label layoutX="29.0" layoutY="14.0" prefHeight="40.0" prefWidth="183.0" text="Appointment Schedule">
@@ -28,10 +28,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="496.0" layoutY="405.0" mnemonicParsing="false" text="Delete Appointment" />
-      <Button layoutX="639.0" layoutY="405.0" mnemonicParsing="false" text="Add Appointment" />
-      <Button layoutX="769.0" layoutY="405.0" mnemonicParsing="false" text="Edit Appointment" />
-      <Button fx:id="OrderByWeekHandler" layoutX="647.0" layoutY="86.0" mnemonicParsing="false" text="Order By Week" />
-      <Button fx:id="orderByMonthHandler" layoutX="761.0" layoutY="86.0" mnemonicParsing="false" text="Order By Month" />
+      <Button layoutX="634.0" layoutY="459.0" mnemonicParsing="false" onAction="#deleteAppointment" text="Delete Appointment" />
+      <Button layoutX="767.0" layoutY="459.0" mnemonicParsing="false" onAction="#addAppointment" text="Add Appointment" />
+      <Button layoutX="888.0" layoutY="459.0" mnemonicParsing="false" onAction="#editAppointment" text="Edit Appointment" />
+      <Button fx:id="showThisWeek" layoutX="673.0" layoutY="86.0" mnemonicParsing="false" text="This weeks appointments" />
+      <Button fx:id="orderByMonthHandler" layoutX="840.0" layoutY="86.0" mnemonicParsing="false" text="This months appointments" />
    </children>
 </AnchorPane>

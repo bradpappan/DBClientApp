@@ -11,12 +11,12 @@
    <children>
       <TableView fx:id="customerRecordsTable" layoutX="36.0" layoutY="131.0" prefHeight="286.0" prefWidth="881.0">
         <columns>
-          <TableColumn fx:id="customerId" prefWidth="99.0" text="Customer_ID" />
-          <TableColumn fx:id="customerName" prefWidth="168.0" text="Customer_Name" />
-            <TableColumn fx:id="customerAddress" prefWidth="229.0" text="Address" />
-            <TableColumn fx:id="customerPostalCode" prefWidth="128.0" text="Postal_Code" />
-            <TableColumn fx:id="customerPhone" prefWidth="159.0" text="Phone" />
-            <TableColumn fx:id="customerDivisionId" prefWidth="97.0" text="Division_ID" />
+          <TableColumn fx:id="customerIdColumn" prefWidth="99.0" text="Customer_ID" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="168.0" text="Customer_Name" />
+            <TableColumn fx:id="customerAddressColumn" prefWidth="229.0" text="Address" />
+            <TableColumn fx:id="customerPostalCodeColumn" prefWidth="128.0" text="Postal_Code" />
+            <TableColumn fx:id="customerPhoneColumn" prefWidth="159.0" text="Phone" />
+            <TableColumn fx:id="customerDivisionIdColumn" prefWidth="97.0" text="Division_ID" />
         </columns>
       </TableView>
       <Label layoutX="36.0" layoutY="14.0" prefHeight="37.0" prefWidth="144.0" text="Customer Records">
@@ -24,8 +24,9 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="addCustomerHandler" layoutX="603.0" layoutY="427.0" mnemonicParsing="false" text="Add Customer" />
-      <Button fx:id="deleteCustomerHandler" layoutX="711.0" layoutY="427.0" mnemonicParsing="false" text="Delete Customer" />
-      <Button fx:id="editCustomerHandler" layoutX="826.0" layoutY="427.0" mnemonicParsing="false" text="Edit Customer" />
+      <Button fx:id="addCustomerHandler" layoutX="603.0" layoutY="427.0" mnemonicParsing="false" onAction="#addCustomer" text="Add Customer" />
+      <Button fx:id="deleteCustomerHandler" layoutX="711.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete Customer" />
+      <Button fx:id="editCustomerHandler" layoutX="826.0" layoutY="427.0" mnemonicParsing="false" onAction="#editCustomer" text="Edit Customer" />
+      <Button layoutX="465.0" layoutY="427.0" mnemonicParsing="false" onAction="#openAppointmentsOnAction" text="Open appointments" />
    </children>
 </AnchorPane>
