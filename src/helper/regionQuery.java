@@ -20,7 +20,6 @@ public class regionQuery {
         return countryName;
     }
 
-
     public static String getDivision(String divisionId) throws SQLException {
         ResultSet rs;
         String divisionName = null;

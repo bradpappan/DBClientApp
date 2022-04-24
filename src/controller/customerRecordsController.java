@@ -43,7 +43,7 @@ public class customerRecordsController implements Initializable {
        initTable();
     }
 
-    private void initTable(){
+    private void initTable() {
         customerRecords = FXCollections.observableArrayList();
 
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));

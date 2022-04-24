@@ -83,7 +83,7 @@ public class addCustomerController implements Initializable {
         int divisionId = 0;
 
         for (addCustomerModel item : divisionOb) {
-            if(divisionCombo.getValue().equals(item.getDivision())) {
+            if (divisionCombo.getValue().equals(item.getDivision())) {
               divisionId = item.getDivisionId();
             }
         }

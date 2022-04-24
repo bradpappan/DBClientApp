@@ -53,13 +53,18 @@ public class appointmentsController implements Initializable {
     private TableColumn<appointmentModel, Integer> appointmentContactIdColumn;
 
     ObservableList<appointmentModel> appointmentSchedule = FXCollections.observableArrayList();
+
     private appointmentModel selectedAppointment;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initTable();
+    }
 
+    private void initTable() {
         selectedCustomerToOpen = customerRecordsController.getCustomerToQuery();
-
+        appointmentSchedule = FXCollections.observableArrayList();
+                
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentTitle"));
         appointmentDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentDescription"));
@@ -79,9 +84,12 @@ public class appointmentsController implements Initializable {
         appointmentSchedulesTable.setItems(appointmentSchedule);
     }
 
+
+
     public void deleteAppointment() throws SQLException {
+        selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
         modifyAppointmentsQuery.deleteAppointment(selectedAppointment.getAppointmentId());
-        
+        initTable();
     }
 
     public void addAppointment(ActionEvent event) {
@@ -113,5 +121,19 @@ public class appointmentsController implements Initializable {
 
     public appointmentModel getAppointmentToQuery() {
         return selectedAppointment;
+    }
+
+    public void exit(ActionEvent event) {
+
+        Parent parent;
+        try {
+            parent = FXMLLoader.load(Objects.requireNonNull(loginPageQuery.class.getResource("/view/customerRecords.fxml")));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

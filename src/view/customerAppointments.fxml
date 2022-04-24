@@ -33,5 +33,6 @@
       <Button layoutX="888.0" layoutY="459.0" mnemonicParsing="false" onAction="#editAppointment" text="Edit Appointment" />
       <Button fx:id="showThisWeek" layoutX="673.0" layoutY="86.0" mnemonicParsing="false" text="This weeks appointments" />
       <Button fx:id="orderByMonthHandler" layoutX="840.0" layoutY="86.0" mnemonicParsing="false" text="This months appointments" />
+      <Button layoutX="940.0" layoutY="565.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="58.0" text="Exit" />
    </children>
 </AnchorPane>

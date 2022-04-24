@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 
 public class JDBC {
 
-
         private static final String protocol = "jdbc";
         private static final String vendor = ":mysql:";
         private static final String location = "//localhost/";
@@ -38,9 +37,6 @@ public class JDBC {
                 System.out.println("Error:" + e.getMessage());
             }
         }
-
-
-
     }
 
 
