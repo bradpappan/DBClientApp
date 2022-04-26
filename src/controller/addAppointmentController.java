@@ -24,8 +24,10 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -54,8 +56,23 @@ public class addAppointmentController implements Initializable {
 
     public void saveAppointment(ActionEvent event) {
 
-        Timestamp start = formatTime(startDp, startTf.getText());
-        Timestamp end = formatTime(endDp, endTf.getText());
+        LocalDate startDate = startDp.getValue();
+        LocalDate endDate = endDp.getValue();
+        String startTime = startTf.getText();
+        String endTime = endTf.getText();
+        String[] arr = startTf.getText().split(":");
+        String[] arr2 = endTf.getText().split(":");
+
+
+        LocalDateTime startLdt = LocalDateTime.of(startDate.getYear(), startDate.getMonthValue(), startDate.getDayOfMonth(), Integer.parseInt(arr[0]), Integer.parseInt(arr[1]));
+        LocalDateTime endLdt = LocalDateTime.of(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth(), Integer.parseInt(arr2[0]), Integer.parseInt(arr2[1]));
+
+        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+
+        Timestamp start = Timestamp.valueOf((customFormatter.format(startLdt)));
+        Timestamp end = Timestamp.valueOf((customFormatter.format(endLdt)));
+
         int customerId = customerRecordsController.getCustomerToQuery().getCustomerId();
 
         String title = titleTf.getText();
@@ -108,4 +125,5 @@ public class addAppointmentController implements Initializable {
         Timestamp ts = Timestamp.valueOf(date.getValue() + " " + time + ":00.000");
         return ts;
     }
+
 }

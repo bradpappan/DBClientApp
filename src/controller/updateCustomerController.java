@@ -52,7 +52,7 @@ public class updateCustomerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //Run Queries
+
         try {
             selectedCustomerToOpen = customerRecordsController.getCustomerToQuery();
             customerId = selectedCustomerToOpen.getCustomerId();
@@ -60,7 +60,7 @@ public class updateCustomerController implements Initializable {
             divisionOb.addAll(customerQuery.getDivision());
 
             for (addCustomerModel item : divisionOb) {
-                if(!countries.contains(item.getCountry())){
+                if(!countries.contains(item.getCountry())) {
                     countries.add(item.getCountry());
                 }
             }
@@ -72,17 +72,17 @@ public class updateCustomerController implements Initializable {
         }
 
 
-        //Set Text Fields
+
         customerNameTf.setText(String.valueOf(selectedCustomerToOpen.getCustomerName()));
         addressTf.setText(String.valueOf(selectedCustomerToOpen.getCustomerAddress()));
         postalCodeTf.setText(String.valueOf(selectedCustomerToOpen.getCustomerPostalCode()));
         phoneTf.setText(String.valueOf(selectedCustomerToOpen.getCustomerPhone()));
 
-        //Set Countries
+
         countryCombo.setItems(countries);
         countryCombo.getSelectionModel().select(countries.indexOf(selectedCountry));
 
-        //Set Divisions
+
         initDivisions();
         divisionCombo.getSelectionModel().select(divisions.indexOf(selectedDivision));
     }

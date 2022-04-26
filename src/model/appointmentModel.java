@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class appointmentModel {
 
@@ -9,14 +9,14 @@ public class appointmentModel {
     private String appointmentDescription;
     private String appointmentLocation;
     private String appointmentType;
-    private Date appointmentStart;
-    private Date appointmentEnd;
+    private Timestamp appointmentStart;
+    private Timestamp appointmentEnd;
     private int appointmentCustomerId;
     private int appointmentUserId;
-    private int appointmentContactId;
+    private String appointmentContactId;
 
     public appointmentModel(String appointmentId, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType,
-                            Date appointmentStart, Date appointmentEnd, int appointmentCustomerId, int appointmentUserId, int appointmentContactId) {
+                            Timestamp appointmentStart, Timestamp appointmentEnd, int appointmentCustomerId, int appointmentUserId, String appointmentContactId) {
 
         this.appointmentId = appointmentId;
         this.appointmentTitle = appointmentTitle;
@@ -70,19 +70,19 @@ public class appointmentModel {
         this.appointmentType = appointmentType;
     }
 
-    public Date getAppointmentStart() {
+    public Timestamp getAppointmentStart() {
         return appointmentStart;
     }
 
-    public void setAppointmentStart(Date appointmentStart) {
+    public void setAppointmentStart(Timestamp appointmentStart) {
         this.appointmentStart = appointmentStart;
     }
 
-    public Date getAppointmentEnd() {
+    public Timestamp getAppointmentEnd() {
         return appointmentEnd;
     }
 
-    public void setAppointmentEnd(Date appointmentEnd) {
+    public void setAppointmentEnd(Timestamp appointmentEnd) {
         this.appointmentEnd = appointmentEnd;
     }
 
@@ -102,11 +102,11 @@ public class appointmentModel {
         this.appointmentUserId = appointmentUserId;
     }
 
-    public int getAppointmentContactId() {
+    public String getAppointmentContactId() {
         return appointmentContactId;
     }
 
-    public void setAppointmentContactId(int appointmentContactId) {
+    public void setAppointmentContactId(String appointmentContactId) {
         this.appointmentContactId = appointmentContactId;
     }
 }

@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.appointmentModel;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class modifyAppointmentsQuery {
 
@@ -26,11 +23,11 @@ public class modifyAppointmentsQuery {
             String appointmentDescription = resultSet.getString("Description");
             String appointmentLocation = resultSet.getString("Location");
             String appointmentType = resultSet.getString("Type");
-            Date appointmentStart = resultSet.getDate("Start");
-            Date appointmentEnd = resultSet.getDate("End");
+            Timestamp appointmentStart = resultSet.getTimestamp("Start");
+            Timestamp appointmentEnd = resultSet.getTimestamp("End");
             int appointmentCustomerId = resultSet.getInt("Customer_ID");
             int appointmentUserId = resultSet.getInt("User_ID");
-            int appointmentContactId = resultSet.getInt("Contact_ID");
+            String appointmentContactId = resultSet.getString("Contact_ID");
 
             appointmentModel appointmentResult = new appointmentModel(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart,
                     appointmentEnd, appointmentCustomerId, appointmentUserId, appointmentContactId);

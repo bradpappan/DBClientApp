@@ -54,7 +54,6 @@ public class customerRecordsQuery {
         String customerPhone = null;
         String customerDivisionId = null;
 
-        ObservableList<customerModel> allCustomersObservableList = FXCollections.observableArrayList();
         String sql = "SELECT Customer_ID, Customer_Name, Address, Postal_Code, Phone, Division_ID FROM customers WHERE Customer_ID = ?";
         preparedStatement = JDBC.connection.prepareStatement(sql);
         preparedStatement.setInt(1, customerId);

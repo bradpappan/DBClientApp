@@ -54,7 +54,7 @@ public class appointmentsController implements Initializable {
 
     ObservableList<appointmentModel> appointmentSchedule = FXCollections.observableArrayList();
 
-    private appointmentModel selectedAppointment;
+    public static appointmentModel selectedAppointment;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,7 +109,7 @@ public class appointmentsController implements Initializable {
         selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
         Parent parent;
         try {
-            parent = FXMLLoader.load(Objects.requireNonNull(loginPageQuery.class.getResource("/view/updateCustomer.fxml")));
+            parent = FXMLLoader.load(Objects.requireNonNull(loginPageQuery.class.getResource("/view/updateAppointment.fxml")));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
@@ -119,7 +119,7 @@ public class appointmentsController implements Initializable {
         }
     }
 
-    public appointmentModel getAppointmentToQuery() {
+    public static appointmentModel getAppointmentToQuery() {
         return selectedAppointment;
     }
 
