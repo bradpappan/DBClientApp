@@ -7,6 +7,8 @@ import model.appointmentModel;
 import model.customerModel;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class appointmentsQuery {
 
@@ -59,7 +61,6 @@ public class appointmentsQuery {
         return allContacts;
     }
 
-//extract start and end date with Timestamp ts = rs.getTimestamp("column name") in query
 public static appointmentModel editAppointment(String appointmentId) throws SQLException {
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
@@ -87,7 +88,6 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         appointmentCustomerId = resultSet.getInt("Customer_ID");
         appointmentUserId = resultSet.getInt("User_ID");
         appointmentContactId = resultSet.getString("Contact_ID");
-
     }
 
     return new appointmentModel(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType,
@@ -107,4 +107,35 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         return contactName;
     }
 
+    public static ObservableList<appointmentModel> checkForOverlap(Timestamp start, Timestamp end, String customerId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        ObservableList<appointmentModel> allAppointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM appointments WHERE ? BETWEEN Start AND End OR ? BETWEEN Start AND End OR ? < Start AND ? > End AND Customer_ID = ?";
+        preparedStatement = JDBC.connection.prepareStatement(sql);
+        preparedStatement.setTimestamp(1, start);
+        preparedStatement.setTimestamp(2, end);
+        preparedStatement.setTimestamp(3, start);
+        preparedStatement.setTimestamp(4, end);
+        preparedStatement.setString(5, customerId);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String appointmentId = resultSet.getString("Appointment_ID");
+            String appointmentTitle = resultSet.getString("Title");
+            String appointmentDescription = resultSet.getString("Description");
+            String appointmentLocation = resultSet.getString("Location");
+            String appointmentType = resultSet.getString("Type");
+            Timestamp appointmentStart = resultSet.getTimestamp("Start");
+            Timestamp appointmentEnd = resultSet.getTimestamp("End");
+            int appointmentCustomerId = resultSet.getInt("Customer_ID");
+            int appointmentUserId = resultSet.getInt("User_ID");
+            String appointmentContactId = resultSet.getString("Contact_ID");
+
+            appointmentModel appointmentResult = new appointmentModel(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart,
+                    appointmentEnd, appointmentCustomerId, appointmentUserId, appointmentContactId);
+            allAppointmentsObservableList.add(appointmentResult);
+        }
+        return allAppointmentsObservableList;
+    }
 }

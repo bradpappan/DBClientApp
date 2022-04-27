@@ -1,5 +1,6 @@
 package controller;
 
+import helper.appointmentsQuery;
 import helper.loginPageQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,8 @@ import model.customerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.*;
+import java.time.zone.ZoneRulesProvider;
 import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -54,6 +57,7 @@ public class appointmentsController implements Initializable {
 
     ObservableList<appointmentModel> appointmentSchedule = FXCollections.observableArrayList();
 
+
     public static appointmentModel selectedAppointment;
 
     @Override
@@ -83,8 +87,6 @@ public class appointmentsController implements Initializable {
         }
         appointmentSchedulesTable.setItems(appointmentSchedule);
     }
-
-
 
     public void deleteAppointment() throws SQLException {
         selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
