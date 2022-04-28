@@ -1,5 +1,6 @@
 package controller;
 
+import helper.appointmentsQuery;
 import helper.customerRecordsQuery;
 import helper.loginPageQuery;
 import model.customerModel;
@@ -63,6 +64,7 @@ public class customerRecordsController implements Initializable {
 
     public void deleteCustomer() throws SQLException {
         selectedCustomer = customerRecordsTable.getSelectionModel().getSelectedItem();
+        appointmentsQuery.deleteAllAppointments(selectedCustomer.getCustomerId());
         customerRecordsQuery.delete(selectedCustomer.getCustomerId());
         initTable();
     }

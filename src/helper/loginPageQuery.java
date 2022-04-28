@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 
 public class loginPageQuery {
 
-    public static void selectUser(ActionEvent event, String username, String password) throws SQLException {
+    public static boolean selectUser(ActionEvent event, String username, String password) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -40,11 +40,13 @@ public class loginPageQuery {
 
             if (!resultSet.isBeforeFirst()) {
                 displayLoginAlert();
+                return false;
             } else {
                 while (resultSet.next()) {
                     String enteredPassword = resultSet.getString("password");
                     if (enteredPassword.equals(password)) {
                         loginSuccessful(event);
+                        return true;
                     } else {
                         displayLoginAlert();
                     }
@@ -53,6 +55,7 @@ public class loginPageQuery {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     public static void loginSuccessful(ActionEvent event) throws Exception {

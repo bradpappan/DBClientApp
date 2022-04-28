@@ -138,4 +138,11 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         }
         return allAppointmentsObservableList;
     }
+
+    public static void deleteAllAppointments(int customerId) throws SQLException {
+        String sql = "DELETE FROM appointments WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        ps.setInt(1, customerId);
+        ps.executeUpdate();
+    }
 }

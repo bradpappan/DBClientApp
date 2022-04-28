@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import model.appointmentModel;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -39,7 +40,8 @@ public class loginController implements Initializable {
         // Changed to lambda expression
         loginBtn.setOnAction(event -> {
             try {
-                loginPageQuery.selectUser(event, usernameTf.getText(), passwordTf.getText());
+                boolean login = loginPageQuery.selectUser(event, usernameTf.getText(), passwordTf.getText());
+                loggerController.logger(usernameTf.getText(), login);
 
                 if (appointments.isEmpty()) {
                     Alert alertError = new Alert(Alert.AlertType.ERROR);
@@ -56,7 +58,7 @@ public class loginController implements Initializable {
                         alertError.showAndWait();
                     }
                 }
-            } catch (SQLException e) {
+            } catch (SQLException | IOException e) {
                 e.printStackTrace();
             }
         });
