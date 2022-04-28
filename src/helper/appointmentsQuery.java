@@ -9,6 +9,7 @@ import model.customerModel;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class appointmentsQuery {
 
@@ -145,4 +146,34 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         ps.setInt(1, customerId);
         ps.executeUpdate();
     }
+
+    public static ObservableList<appointmentModel> thisWeeksAppointments(Timestamp start, Timestamp end) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        ObservableList<appointmentModel> appointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM appointments WHERE Start BETWEEN ? AND ?";
+        preparedStatement = JDBC.connection.prepareStatement(sql);
+        preparedStatement.setTimestamp(1, start);
+        preparedStatement.setTimestamp(2, end);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String appointmentId = resultSet.getString("Appointment_ID");
+            String appointmentTitle = resultSet.getString("Title");
+            String appointmentDescription = resultSet.getString("Description");
+            String appointmentLocation = resultSet.getString("Location");
+            String appointmentType = resultSet.getString("Type");
+            Timestamp appointmentStart = resultSet.getTimestamp("Start");
+            Timestamp appointmentEnd = resultSet.getTimestamp("End");
+            int appointmentCustomerId = resultSet.getInt("Customer_ID");
+            int appointmentUserId = resultSet.getInt("User_ID");
+            String appointmentContactId = resultSet.getString("Contact_ID");
+
+            appointmentModel appointmentResult = new appointmentModel(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart,
+                    appointmentEnd, appointmentCustomerId, appointmentUserId, appointmentContactId);
+            appointmentsObservableList.add(appointmentResult);
+        }
+        return appointmentsObservableList;
+    }
+
 }

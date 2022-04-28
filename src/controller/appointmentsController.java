@@ -22,7 +22,9 @@ import model.customerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.zone.ZoneRulesProvider;
 import java.util.Date;
 import java.util.Objects;
@@ -137,5 +139,45 @@ public class appointmentsController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void weeksBtn(ActionEvent event) throws SQLException {
+
+        ObservableList<appointmentModel> appointmentFilter = FXCollections.observableArrayList();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        ZonedDateTime startWeekDate = ZonedDateTime.now(ZoneId.systemDefault());
+        ZonedDateTime endWeekDate = startWeekDate.plusWeeks(1);
+
+        Timestamp start = Timestamp.valueOf(formatter.format(startWeekDate));
+        Timestamp end = Timestamp.valueOf(formatter.format(endWeekDate));
+
+        appointmentFilter = appointmentsQuery.thisWeeksAppointments(start, end);
+
+        showAppointments(appointmentFilter);
+
+    }
+
+    public void monthsBtn(ActionEvent event) throws SQLException {
+
+        ObservableList<appointmentModel> appointmentFilter = FXCollections.observableArrayList();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        ZonedDateTime startWeekDate = ZonedDateTime.now(ZoneId.systemDefault());
+        ZonedDateTime endWeekDate = startWeekDate.plusMonths(1);
+
+        Timestamp start = Timestamp.valueOf(formatter.format(startWeekDate));
+        Timestamp end = Timestamp.valueOf(formatter.format(endWeekDate));
+
+        appointmentFilter = appointmentsQuery.thisWeeksAppointments(start, end);
+
+        showAppointments(appointmentFilter);
+
+    }
+
+    public void showAppointments(ObservableList<appointmentModel> appointmentList) {
+        appointmentSchedulesTable.setItems(appointmentList);
     }
 }
