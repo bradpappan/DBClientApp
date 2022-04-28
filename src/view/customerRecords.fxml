@@ -28,5 +28,6 @@
       <Button fx:id="deleteCustomerHandler" layoutX="711.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete Customer" />
       <Button fx:id="editCustomerHandler" layoutX="826.0" layoutY="427.0" mnemonicParsing="false" onAction="#editCustomer" text="Edit Customer" />
       <Button layoutX="465.0" layoutY="427.0" mnemonicParsing="false" onAction="#openAppointmentsOnAction" text="Open appointments" />
+      <Button layoutX="809.0" layoutY="33.0" mnemonicParsing="false" onAction="#openReports" text="Open Reports" />
    </children>
 </AnchorPane>

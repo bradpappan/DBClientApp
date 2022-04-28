@@ -98,6 +98,7 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
     public static String getContactName(String contactId) throws SQLException {
         ResultSet rs;
         String contactName = null;
+
         String sql = "SELECT * FROM contacts WHERE Contact_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ps.setString(1, contactId);

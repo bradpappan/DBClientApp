@@ -128,4 +128,17 @@ public class customerRecordsController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void openReports(ActionEvent event) {
+        Parent parent;
+        try {
+            parent = FXMLLoader.load(Objects.requireNonNull(loginPageQuery.class.getResource("/view/reports.fxml")));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

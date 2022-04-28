@@ -21,7 +21,7 @@ public class Main extends Application {
         launch(args);
 
         Locale france = new Locale("fr", "FR");
-        ResourceBundle rb = ResourceBundle.getBundle("language/FR", Locale.getDefault());
+        ResourceBundle rb = ResourceBundle.getBundle("language/fr", Locale.getDefault());
         if (Locale.getDefault().getLanguage().equals("fr"));
 
 
