@@ -22,14 +22,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 
+/**
+ * This class is the controller for the update appointment view
+ */
 public class updateAppointmentController implements Initializable {
 
     private ObservableList<addAppointmentModel> contactsOb = FXCollections.observableArrayList();
@@ -55,6 +55,14 @@ public class updateAppointmentController implements Initializable {
     @FXML private DatePicker endDp;
 
 
+    /**
+     *
+     * @param customerId passes in the customerId
+     * @param startLdt passes in the start time
+     * @param endLdt passes in the end time
+     * @return True if not overlapping another appointment, false if is
+     * @throws SQLException
+     */
     private Boolean addAppointmentValidation (String customerId, LocalDateTime startLdt, LocalDateTime endLdt) throws SQLException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -70,6 +78,13 @@ public class updateAppointmentController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param startTime passes in the start time for the appointment
+     * @param endTime passes in the end time for the appointment
+     * @param startDate passes in the start date
+     * @return True if appointment is within hours, false if not
+     */
     private boolean businessHours (String startTime, String endTime, LocalDate startDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -90,6 +105,12 @@ public class updateAppointmentController implements Initializable {
         return !(zonedStartTime.isBefore(start) | zonedStartTime.isAfter(end) | zonedEndTime.isBefore(start) | zonedEndTime.isAfter(end) | start.isAfter(end));
     }
 
+    /**
+     * Checks for overlapped appointments and that the appointment is within business hours
+     * Formats the time and changes it to a timestamp
+     * @param event saves inputted appointment information
+     * @throws SQLException
+     */
     public void saveAppointment(ActionEvent event) throws SQLException {
 
         boolean appointmentError = true;
@@ -150,6 +171,11 @@ public class updateAppointmentController implements Initializable {
         }
     }
 
+    /**
+     * Initializes the update appointment view and populates the view with all selected appointment information
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -198,6 +224,11 @@ public class updateAppointmentController implements Initializable {
         endDp.setValue(selectedAppointment.getAppointmentEnd().toLocalDateTime().toLocalDate());
     }
 
+    /**
+     *
+     * @param event returns the view back to the customer appointments view
+     * @throws IOException
+     */
     private void returnToAppointments (ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerAppointments.fxml")));
         Scene scene = new Scene(parent);
@@ -205,4 +236,6 @@ public class updateAppointmentController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+
 }

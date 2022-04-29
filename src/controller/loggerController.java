@@ -12,8 +12,17 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * This class is the controller for the logged reports
+ */
 public class loggerController {
 
+    /**
+     *
+     * @param userName passes the username to the login_activity text file
+     * @param success shows whether the login attempt was successful
+     * @throws IOException
+     */
     public static void logger(String userName, Boolean success) throws IOException {
 
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());

@@ -24,6 +24,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This class is the controller for the update customer view
+ */
 public class updateCustomerController implements Initializable {
 
     @FXML
@@ -49,6 +52,11 @@ public class updateCustomerController implements Initializable {
 
     customerModel selectedCustomerToOpen;
 
+    /**
+     * Initializes the update customer view, populates the view with selected customer information
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -87,7 +95,9 @@ public class updateCustomerController implements Initializable {
         divisionCombo.getSelectionModel().select(divisions.indexOf(selectedDivision));
     }
 
-
+    /**
+     * Gets the selected country and populates the division combo box
+     */
     @FXML
     public void initDivisions() {
         String countrySelected = countryCombo.getValue();
@@ -101,6 +111,11 @@ public class updateCustomerController implements Initializable {
         divisionCombo.setItems(divisions);
     }
 
+    /**
+     *
+     * @param event saves the customer
+     * @throws SQLException
+     */
     public void saveCustomer(ActionEvent event) throws SQLException {
         String name = customerNameTf.getText();
         String address = addressTf.getText();

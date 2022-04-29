@@ -1,6 +1,5 @@
 package controller;
 
-import helper.appointmentsQuery;
 import helper.loginPageQuery;
 import helper.reportsQuery;
 import javafx.collections.ObservableList;
@@ -17,11 +16,19 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * This class is the controller for the reports view
+ */
 public class reportsController {
 
     @FXML
     TextArea reportTa;
 
+    /**
+     * first report that shows total number of types, months and lists them in a text area
+     * @param event launches the queries to populate the observable lists
+     * @throws SQLException
+     */
     public void showFirstReport(ActionEvent event) throws SQLException {
 
         ObservableList<String> typeList = reportsQuery.typeList();
@@ -36,6 +43,11 @@ public class reportsController {
         }
     }
 
+    /**
+     * second report that shows contact names and the appointments they have
+     * @param event launches the queries to populate the observable list
+     * @throws SQLException
+     */
     public void showSecondReport(ActionEvent event) throws SQLException {
 
         ObservableList<String> contacts = reportsQuery.contactNames();
@@ -55,6 +67,11 @@ public class reportsController {
         }
     }
 
+    /**
+     * third report that shows the total number of active customers
+     * @param event launches the queries to populate the string
+     * @throws SQLException
+     */
     public void showThirdReport(ActionEvent event) throws SQLException {
 
        String numberOfCustomers = reportsQuery.countCustomers();
@@ -66,6 +83,10 @@ public class reportsController {
        }
     }
 
+    /**
+     *
+     * @param event exits to the customer records view
+     */
     public void exitHandler(ActionEvent event) {
         Parent parent;
         try {

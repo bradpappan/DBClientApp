@@ -25,6 +25,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This class is the main controller for the customer records table view
+ */
 public class customerRecordsController implements Initializable {
     
     public static customerModel selectedCustomer;
@@ -38,7 +41,12 @@ public class customerRecordsController implements Initializable {
     @FXML private TableColumn<customerModel, Integer> customerDivisionIdColumn;
 
     ObservableList<customerModel> customerRecords;
-    
+
+    /**
+     * Initializes the customer records screen and populates the table view
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
        initTable();
@@ -62,6 +70,10 @@ public class customerRecordsController implements Initializable {
         customerRecordsTable.setItems(customerRecords);
     }
 
+    /**
+     * Deletes the selected customers appointments and then the selected customer
+     * @throws SQLException
+     */
     public void deleteCustomer() throws SQLException {
         selectedCustomer = customerRecordsTable.getSelectionModel().getSelectedItem();
         appointmentsQuery.deleteAllAppointments(selectedCustomer.getCustomerId());
@@ -69,10 +81,18 @@ public class customerRecordsController implements Initializable {
         initTable();
     }
 
+    /**
+     *
+     * @return the selected customer to query
+     */
     public static customerModel getCustomerToQuery() {
         return selectedCustomer;
     }
 
+    /**
+     *
+     * @param event opens the selected customers appointments
+     */
     @FXML
     public void openAppointmentsOnAction (ActionEvent event) {
         selectedCustomer = customerRecordsTable.getSelectionModel().getSelectedItem();
@@ -93,6 +113,10 @@ public class customerRecordsController implements Initializable {
             }
     }
 
+    /**
+     *
+     * @param event changes scene to the add customer view
+     */
     @FXML
     public void addCustomer(ActionEvent event) {
         Parent parent;
@@ -107,6 +131,11 @@ public class customerRecordsController implements Initializable {
         }
     }
 
+    /**
+     * Custom alert that can be used to display an error
+     * @param header can input any message
+     * @param content can input any message
+     */
     private static void displayCustomAlert(String header, String content) {
         Alert alertError = new Alert(Alert.AlertType.ERROR);
         alertError.setTitle("Error");
@@ -115,6 +144,10 @@ public class customerRecordsController implements Initializable {
         alertError.showAndWait();
     }
 
+    /**
+     *
+     * @param event changes scene to the edit customer view
+     */
     public void editCustomer(ActionEvent event) {
         selectedCustomer = customerRecordsTable.getSelectionModel().getSelectedItem();
         Parent parent;
@@ -129,6 +162,10 @@ public class customerRecordsController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event changes scene to the reports view
+     */
     public void openReports(ActionEvent event) {
         Parent parent;
         try {

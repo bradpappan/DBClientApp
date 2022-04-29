@@ -4,9 +4,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This class holds the queries for pulling the country data
+ */
 public class regionQuery {
 
-
+    /**
+     *
+     * @param divisionId passes in the divisionId
+     * @return gets the country
+     * @throws SQLException
+     */
     public static String getCountry(String divisionId) throws SQLException {
         ResultSet rs;
         String countryName = null;
@@ -20,6 +28,12 @@ public class regionQuery {
         return countryName;
     }
 
+    /**
+     *
+     * @param divisionId passes in the divisionId
+     * @return gets the division names
+     * @throws SQLException
+     */
     public static String getDivision(String divisionId) throws SQLException {
         ResultSet rs;
         String divisionName = null;

@@ -1,7 +1,6 @@
 package controller;
 
 import helper.appointmentsQuery;
-import helper.customerQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,22 +13,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.addAppointmentModel;
-import model.addCustomerModel;
 import model.appointmentModel;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This class adds an appointment to the appointment table view
+ */
 public class addAppointmentController implements Initializable {
 
     @FXML private TextField appointmentIdTf;
@@ -52,6 +49,14 @@ public class addAppointmentController implements Initializable {
 
     private Object selectedCustomerToOpen;
 
+    /**
+     *
+     * @param customerId passes in customerId to get row
+     * @param startLdt passes in the start time
+     * @param endLdt passes in the end time
+     * @return True if not overlapping another appointment, false if is
+     * @throws SQLException
+     */
     private Boolean addAppointmentValidation (String customerId, LocalDateTime startLdt, LocalDateTime endLdt) throws SQLException {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -67,7 +72,13 @@ public class addAppointmentController implements Initializable {
             }
         }
 
-
+    /**
+     *
+     * @param startTime passes in the start time for the appointment
+     * @param endTime passes in the end time for the appointment
+     * @param startDate passes in the start date
+     * @return True if appointment is within hours, false if not
+     */
     private boolean businessHours (String startTime, String endTime, LocalDate startDate) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -88,10 +99,19 @@ public class addAppointmentController implements Initializable {
         return !(zonedStartTime.isBefore(start) | zonedStartTime.isAfter(end) | zonedEndTime.isBefore(start) | zonedEndTime.isAfter(end) | start.isAfter(end));
     }
 
+    /**
+     * Checks for overlapped appointments and that the appointment is within business hours
+     * Formats the time and changes it to a timestamp
+     * @param event saves inputted appointment information
+     * @throws SQLException
+     */
     public void saveAppointment(ActionEvent event) throws SQLException {
 
         boolean appointmentError = true;
         boolean closedHours = true;
+
+        //Lambda expression
+        contentAlert message = s -> s = "Error";
 
         LocalDate startDate = startDp.getValue();
         LocalDate endDate = endDp.getValue();
@@ -124,14 +144,14 @@ public class addAppointmentController implements Initializable {
 
         if (!appointmentError) {
             Alert alertError = new Alert(Alert.AlertType.ERROR);
-            alertError.setTitle("Error");
+            alertError.setTitle(String.valueOf(message));
             alertError.setHeaderText("Overlapped appointment");
             alertError.setContentText("Cannot schedule overlapped appointment, please choose another date or time.");
             alertError.showAndWait();
             return;
         } else if (!closedHours) {
             Alert alertError = new Alert(Alert.AlertType.ERROR);
-            alertError.setTitle("Error");
+            alertError.setTitle(String.valueOf(message));
             alertError.setHeaderText("Outside business hours.");
             alertError.setContentText("The appointment is outside business hours, please choose a different time.");
             alertError.showAndWait();
@@ -150,6 +170,11 @@ public class addAppointmentController implements Initializable {
         }
     }
 
+    /**
+     * Initializes the add appointment page
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -167,6 +192,11 @@ public class addAppointmentController implements Initializable {
             contactCombo.setItems(contacts);
     }
 
+    /**
+     *
+     * @param event returns to customer appointment screen
+     * @throws IOException
+     */
     private void returnToAppointments (ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerAppointments.fxml")));
         Scene scene = new Scene(parent);
@@ -175,13 +205,10 @@ public class addAppointmentController implements Initializable {
         stage.show();
     }
 
-    private void displayNameAlert(String header, String content) {
-
-        Alert alertError = new Alert(Alert.AlertType.ERROR);
-        alertError.setTitle("Error");
-        alertError.setHeaderText(header);
-        alertError.setContentText(content);
-        alertError.showAndWait();
+    /**
+     * First lambda expression
+     */
+    public interface contentAlert {
+         void display(String s);
     }
-
 }

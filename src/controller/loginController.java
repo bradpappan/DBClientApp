@@ -19,6 +19,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.time.ZoneId;
 
+/**
+ * This class is the controller for the login page
+ */
 public class loginController implements Initializable {
 
     private ObservableList<appointmentModel> appointments = FXCollections.observableArrayList();
@@ -28,6 +31,11 @@ public class loginController implements Initializable {
     @FXML private Label zoneIdLbl;
     @FXML private Button loginBtn;
 
+    /**
+     * Initializes the login page, runs the query for the login attempt, and shows an alert for appointments with 15 minutes
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -38,7 +46,6 @@ public class loginController implements Initializable {
         }
 
         initializeZoneId();
-        // Changed to lambda expression
         loginBtn.setOnAction(event -> {
             try {
                 boolean login = loginPageQuery.selectUser(event, usernameTf.getText(), passwordTf.getText());
@@ -65,6 +72,9 @@ public class loginController implements Initializable {
         });
     }
 
+    /**
+     * Sets the zone id label to system default
+     */
     public void initializeZoneId() {
         zoneIdLbl.setText(ZoneId.systemDefault().getId());
     }

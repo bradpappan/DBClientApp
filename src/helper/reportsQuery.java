@@ -2,15 +2,23 @@ package helper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.appointmentModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+/**
+ * This class holds the queries for the reports page
+ */
 public class reportsQuery {
 
+    /**
+     * displays appointment information for a report
+     * @param contactId passes in the contactId
+     * @return a string of appointment information that matches a contactId
+     * @throws SQLException
+     */
     public static ObservableList<String> contactAppointmentList(String contactId) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -36,6 +44,12 @@ public class reportsQuery {
         return appointmentsObservableList;
     }
 
+    /**
+     *
+     * @param contactName passes in the contactName
+     * @return gets the contactIds that equals the name
+     * @throws SQLException
+     */
     public static String contactIds(String contactName) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -52,6 +66,11 @@ public class reportsQuery {
         return contactId;
     }
 
+    /**
+     *
+     * @return the contactNames
+     * @throws SQLException
+     */
     public static ObservableList<String> contactNames() throws SQLException {
         ResultSet rs;
         String contactName = null;
@@ -68,6 +87,11 @@ public class reportsQuery {
         return appointmentsObservableList;
     }
 
+    /**
+     * Queries the database for a list of types and how many there are
+     * @return a list of types and a number attached to it
+     * @throws SQLException
+     */
     public static ObservableList<String> typeList() throws SQLException {
         PreparedStatement ps = null;
         ResultSet typeResultSet = null;
@@ -87,6 +111,11 @@ public class reportsQuery {
         return appointmentsObservableList;
     }
 
+    /**
+     *
+     * @return a list of appointments by month
+     * @throws SQLException
+     */
     public static ObservableList<String> monthList() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet monthResultSet = null;
@@ -103,6 +132,11 @@ public class reportsQuery {
         return appointmentsObservableList;
     }
 
+    /**
+     *
+     * @return counts the total number of customers in the database
+     * @throws SQLException
+     */
     public static String countCustomers() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

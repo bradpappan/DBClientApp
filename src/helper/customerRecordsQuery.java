@@ -8,8 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This class holds the queries for customer records
+ */
 public class customerRecordsQuery {
 
+    /**
+     * Deletes the selected customer
+     * @param customerId passes in the customerId
+     * @throws SQLException
+     */
     public static void delete(int customerId) throws SQLException {
         String sql = "DELETE FROM customers WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -17,12 +25,22 @@ public class customerRecordsQuery {
         ps.executeUpdate();
     }
 
+    /**
+     * Selects all from the customers table
+     * @param customerId passes in the customerId
+     * @throws SQLException
+     */
     public static void select(int customerId) throws SQLException {
         String sql = "SELECT * FROM customers";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
     }
 
+    /**
+     *
+     * @return Gets all the information from the customers table
+     * @throws SQLException
+     */
     public static ObservableList<customerModel> getAllCustomers() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -44,7 +62,13 @@ public class customerRecordsQuery {
         }
         return allCustomersObservableList;
     }
-    
+
+    /**
+     *
+     * @param customerId passes in the customerId
+     * @return the selected customer to be edited
+     * @throws SQLException
+     */
     public static customerModel editCustomer(int customerId) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

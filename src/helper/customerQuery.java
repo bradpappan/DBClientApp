@@ -8,9 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * This class holds queries for customer views
+ */
 public class customerQuery {
 
-
+    /**
+     *
+     * @return the divisions
+     * @throws SQLException
+     */
     public static ObservableList<addCustomerModel> getDivision() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -31,6 +38,15 @@ public class customerQuery {
         return allDivisions;
     }
 
+    /**
+     * Inserts a customer into the table view and database
+     * @param name passes in the name
+     * @param address passes in the address
+     * @param postalCode passes in the postalCode
+     * @param phone passes the phone
+     * @param divisionId passes in the divisionId
+     * @throws SQLException
+     */
     public static void insertCustomer(String name, String address, int postalCode, String phone, int divisionId) throws SQLException {
         String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES (?, ?, ?, ?, ?) ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -42,6 +58,16 @@ public class customerQuery {
         ps.executeUpdate();
     }
 
+    /**
+     * Updates a selected customer record in the table view and database
+     * @param customerId passes in the customerId
+     * @param name passes in the name
+     * @param address passes in the address
+     * @param postalCode passes in the postalCode
+     * @param phone passes in the phone
+     * @param divisionId passes in the divisionId
+     * @throws SQLException
+     */
     public static void updateCustomer(int customerId, String name, String address, int postalCode, String phone, int divisionId) throws SQLException {
         String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -53,6 +79,4 @@ public class customerQuery {
         ps.setInt(6, customerId);
         ps.executeUpdate();
     }
-
-
 }

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * This class holds the contact model
+ */
 public class contactModel {
 
     private int contactId;

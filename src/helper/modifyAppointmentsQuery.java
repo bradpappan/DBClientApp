@@ -6,8 +6,17 @@ import model.appointmentModel;
 
 import java.sql.*;
 
+/**
+ * This class hold queries for modify appointments
+ */
 public class modifyAppointmentsQuery {
 
+    /**
+     *
+     * @param customerId passes in the customerId
+     * @return Gets all the appointments that equals customerId
+     * @throws SQLException
+     */
     public static ObservableList<appointmentModel> getAllAppointments(String customerId) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -36,7 +45,11 @@ public class modifyAppointmentsQuery {
         return allAppointmentsObservableList;
     }
 
-
+    /**
+     * Deletes an appointment that equals the appointmentId
+     * @param appointmentId passes in the appointmentId
+     * @throws SQLException
+     */
     public static void deleteAppointment(String appointmentId) throws SQLException {
         String sql = "DELETE FROM appointments WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);

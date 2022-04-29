@@ -30,6 +30,9 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * This class is the main controller for the appointment table view
+ */
 public class appointmentsController implements Initializable {
 
     public static customerModel selectedCustomerToOpen;
@@ -62,6 +65,11 @@ public class appointmentsController implements Initializable {
 
     public static appointmentModel selectedAppointment;
 
+    /**
+     * Initializes the appointments table view and populates the tables with selected customer appointments
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initTable();
@@ -90,12 +98,20 @@ public class appointmentsController implements Initializable {
         appointmentSchedulesTable.setItems(appointmentSchedule);
     }
 
+    /**
+     * Deletes the selected appointment
+     * @throws SQLException
+     */
     public void deleteAppointment() throws SQLException {
         selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
         modifyAppointmentsQuery.deleteAppointment(selectedAppointment.getAppointmentId());
         initTable();
     }
 
+    /**
+     *
+     * @param event changes to the add appointment screen
+     */
     public void addAppointment(ActionEvent event) {
         Parent parent;
         try {
@@ -109,6 +125,10 @@ public class appointmentsController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event changes to the edit appointment screen
+     */
     public void editAppointment(ActionEvent event) {
         selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
         Parent parent;
@@ -123,10 +143,18 @@ public class appointmentsController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @return the selected appointment in the table view
+     */
     public static appointmentModel getAppointmentToQuery() {
         return selectedAppointment;
     }
 
+    /**
+     *
+     * @param event exits back to the customer records screen
+     */
     public void exit(ActionEvent event) {
 
         Parent parent;
@@ -141,6 +169,11 @@ public class appointmentsController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event filters the appointments by showing the next 7 days of appointments
+     * @throws SQLException
+     */
     public void weeksBtn(ActionEvent event) throws SQLException {
 
         ObservableList<appointmentModel> appointmentFilter = FXCollections.observableArrayList();
@@ -159,6 +192,11 @@ public class appointmentsController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param event filters the appointments by showing the next month of appointments
+     * @throws SQLException
+     */
     public void monthsBtn(ActionEvent event) throws SQLException {
 
         ObservableList<appointmentModel> appointmentFilter = FXCollections.observableArrayList();
@@ -177,6 +215,10 @@ public class appointmentsController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param appointmentList sets the table view to the filtered appointments, either by month or week
+     */
     public void showAppointments(ObservableList<appointmentModel> appointmentList) {
         appointmentSchedulesTable.setItems(appointmentList);
     }

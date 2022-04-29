@@ -21,7 +21,9 @@ import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-
+/**
+ * This class adds a customer to the customer table view
+ */
 public class addCustomerController implements Initializable {
 
     @FXML
@@ -44,7 +46,11 @@ public class addCustomerController implements Initializable {
     private ObservableList<String> divisions = FXCollections.observableArrayList();
 
 
-
+    /**
+     * Initializes the add customer page
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -62,6 +68,10 @@ public class addCustomerController implements Initializable {
             countryCombo.setItems(countries);
     }
 
+    /**
+     * Populates the division combo box
+     * @param event chooses a country
+     */
     @FXML
     public void onSelected(ActionEvent event) {
         String countrySelected = countryCombo.getValue();
@@ -75,6 +85,11 @@ public class addCustomerController implements Initializable {
         divisionCombo.setItems(divisions);
     }
 
+    /**
+     *
+     * @param event saves the customer
+     * @throws SQLException
+     */
     public void saveCustomer(ActionEvent event) throws SQLException {
         String name = customerNameTf.getText();
         String address = addressTf.getText();
@@ -96,6 +111,11 @@ public class addCustomerController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event returns the customer records screen
+     * @throws IOException
+     */
     private void returnToRecords (ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/customerRecords.fxml")));
         Scene scene = new Scene(parent);

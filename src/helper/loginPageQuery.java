@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,22 +12,25 @@ import javafx.stage.Stage;
 import model.appointmentModel;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-
+/**
+ * This class holds the queries for the login page
+ */
 public class loginPageQuery {
 
+    /**
+     *
+     * @param event passes in the event
+     * @param username passes in the username
+     * @param password passes in the password
+     * @return returns the selected user and verifies the information matches
+     * @throws SQLException
+     */
     public static boolean selectUser(ActionEvent event, String username, String password) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -58,6 +60,11 @@ public class loginPageQuery {
         return false;
     }
 
+    /**
+     * Changes scene if the login was successful
+     * @param event changes scene to customer records
+     * @throws Exception
+     */
     public static void loginSuccessful(ActionEvent event) throws Exception {
         Parent parent;
         try {
@@ -71,7 +78,9 @@ public class loginPageQuery {
         }
     }
 
-
+    /**
+     * Displays error if username or password doesnt match
+     */
     private static void displayLoginAlert() {
         Alert alertError = new Alert(Alert.AlertType.ERROR);
         alertError.setTitle("Error");
@@ -80,6 +89,11 @@ public class loginPageQuery {
         alertError.showAndWait();
     }
 
+    /**
+     *
+     * @return appointments within 15 minutes of login
+     * @throws SQLException
+     */
     public static ObservableList<appointmentModel> appointmentWarning() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;

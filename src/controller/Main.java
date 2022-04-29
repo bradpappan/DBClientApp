@@ -1,6 +1,5 @@
 package controller;
 
-
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +9,18 @@ import javafx.stage.Stage;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 
-// To test the french language in the login page use, Locale.setDefault(new Locale)("fr"));
+
+/**
+ * Main class
+ */
 public class Main extends Application {
 
 
+    /**
+     *
+     * @param args launches the program
+     */
     public static void main(String[] args) {
         JDBC.openConnection();
         launch(args);
@@ -27,6 +32,11 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Loads the login page
+     * @param primaryStage
+     * @throws Exception
+     */
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/loginPage.fxml"));
         primaryStage.setTitle("DBClientApp");

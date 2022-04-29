@@ -4,15 +4,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.addAppointmentModel;
 import model.appointmentModel;
-import model.customerModel;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
+/**
+ * This class holds queries for the appointments view
+ */
 public class appointmentsQuery {
 
+    /**
+     * Inserts the appointment into the appointment tableview and database
+     * @param title passes title
+     * @param description passes description
+     * @param location passes location
+     * @param type passes type
+     * @param start passes start
+     * @param end passes end
+     * @param customerId passes customerId
+     * @param userId passes userId
+     * @param contactId passes contactId
+     * @throws SQLException
+     */
     public static void insertAppointment(String title, String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId) throws SQLException {
         String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -28,6 +40,19 @@ public class appointmentsQuery {
         ps.executeUpdate();
     }
 
+    /**
+     * Updates a selected appointment in the tableview and database
+     * @param title passes title
+     * @param description passes description
+     * @param location passes location
+     * @param type passes type
+     * @param start passes start
+     * @param end passes end
+     * @param customerId passes customerId
+     * @param userId passes userId
+     * @param contactId passes contactId
+     * @throws SQLException
+     */
     public static void updateAppointment(String appointmentId, String title, String description, String location, String type, Timestamp start, Timestamp end, int contactId, int customerId, int userId) throws SQLException {
         String sql = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -44,6 +69,11 @@ public class appointmentsQuery {
         ps.executeUpdate();
     }
 
+    /**
+     *
+     * @return gets the contact information
+     * @throws SQLException
+     */
     public static ObservableList<addAppointmentModel> getContacts() throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -62,7 +92,13 @@ public class appointmentsQuery {
         return allContacts;
     }
 
-public static appointmentModel editAppointment(String appointmentId) throws SQLException {
+    /**
+     *
+     * @param appointmentId passes in the appointmentId
+     * @return the selected appointment to edit
+     * @throws SQLException
+     */
+    public static appointmentModel editAppointment(String appointmentId) throws SQLException {
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
     String appointmentTitle = null;
@@ -95,6 +131,12 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
             appointmentStart, appointmentEnd, appointmentCustomerId, appointmentUserId, appointmentContactId);
 }
 
+    /**
+     *
+     * @param contactId passes in the contactId
+     * @return gets the contact name
+     * @throws SQLException
+     */
     public static String getContactName(String contactId) throws SQLException {
         ResultSet rs;
         String contactName = null;
@@ -109,6 +151,14 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         return contactName;
     }
 
+    /**
+     *
+     * @param start passes in the start time
+     * @param end passes in the end time
+     * @param customerId passes in the customerId
+     * @return any overlapping appointments
+     * @throws SQLException
+     */
     public static ObservableList<appointmentModel> checkForOverlap(Timestamp start, Timestamp end, String customerId) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -141,6 +191,11 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         return allAppointmentsObservableList;
     }
 
+    /**
+     * Deletes all appointments for a selected customerId
+     * @param customerId passes in the customerId
+     * @throws SQLException
+     */
     public static void deleteAllAppointments(int customerId) throws SQLException {
         String sql = "DELETE FROM appointments WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.connection.prepareStatement(sql);
@@ -148,6 +203,13 @@ public static appointmentModel editAppointment(String appointmentId) throws SQLE
         ps.executeUpdate();
     }
 
+    /**
+     *
+     * @param start passes in a start time
+     * @param end passes in a end time
+     * @return all appointments within 7 days
+     * @throws SQLException
+     */
     public static ObservableList<appointmentModel> thisWeeksAppointments(Timestamp start, Timestamp end) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
