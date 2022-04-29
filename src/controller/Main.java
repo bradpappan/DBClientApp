@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 
 /**
+ * @author Brad Pappan
  * Main class
  */
 public class Main extends Application {
