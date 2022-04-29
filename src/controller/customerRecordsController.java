@@ -3,6 +3,7 @@ package controller;
 import helper.appointmentsQuery;
 import helper.customerRecordsQuery;
 import helper.loginPageQuery;
+import javafx.scene.control.Button;
 import model.customerModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,8 @@ public class customerRecordsController implements Initializable {
     
     public static customerModel selectedCustomer;
 
+    public Button appointmentBtn;
+
     @FXML public TableView<customerModel> customerRecordsTable;
     @FXML private TableColumn<customerModel, Integer> customerIdColumn;
     @FXML private TableColumn<customerModel, String> customerNameColumn;
@@ -44,6 +47,7 @@ public class customerRecordsController implements Initializable {
 
     /**
      * Initializes the customer records screen and populates the table view
+     * Lambda expression that sets up a table event to change name of appointments button
      * @param url
      * @param resourceBundle
      */
@@ -68,6 +72,14 @@ public class customerRecordsController implements Initializable {
             e.printStackTrace();
         }
         customerRecordsTable.setItems(customerRecords);
+
+        //Lambda expression that sets up a table event to change name of appointments button
+        customerRecordsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                System.out.println(newSelection.getCustomerName());
+                appointmentBtn.setText(newSelection.getCustomerName() + " Appointments");
+            }
+        });
     }
 
     /**

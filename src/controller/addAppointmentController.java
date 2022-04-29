@@ -102,6 +102,7 @@ public class addAppointmentController implements Initializable {
     /**
      * Checks for overlapped appointments and that the appointment is within business hours
      * Formats the time and changes it to a timestamp
+     * Lambda expression prints out error header for display message
      * @param event saves inputted appointment information
      * @throws SQLException
      */
@@ -110,7 +111,7 @@ public class addAppointmentController implements Initializable {
         boolean appointmentError = true;
         boolean closedHours = true;
 
-        //Lambda expression
+        //Lambda expression prints out error header for display message
         contentAlert message = s -> s = "Error";
 
         LocalDate startDate = startDp.getValue();

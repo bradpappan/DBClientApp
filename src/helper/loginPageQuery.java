@@ -17,11 +17,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 /**
  * This class holds the queries for the login page
  */
 public class loginPageQuery {
+
+    private ResourceBundle rb = ResourceBundle.getBundle("language/login");
 
     /**
      *
@@ -31,7 +34,7 @@ public class loginPageQuery {
      * @return returns the selected user and verifies the information matches
      * @throws SQLException
      */
-    public static boolean selectUser(ActionEvent event, String username, String password) throws SQLException {
+    public static boolean selectUser(ActionEvent event, String username, String password, ResourceBundle rb) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -41,7 +44,7 @@ public class loginPageQuery {
             resultSet = preparedStatement.executeQuery();
 
             if (!resultSet.isBeforeFirst()) {
-                displayLoginAlert();
+                displayLoginAlert(rb);
                 return false;
             } else {
                 while (resultSet.next()) {
@@ -50,7 +53,7 @@ public class loginPageQuery {
                         loginSuccessful(event);
                         return true;
                     } else {
-                        displayLoginAlert();
+                        displayLoginAlert(rb);
                     }
                 }
             }
@@ -79,13 +82,13 @@ public class loginPageQuery {
     }
 
     /**
-     * Displays error if username or password doesnt match
+     * Displays error if username or password doesnt match in english or french
      */
-    private static void displayLoginAlert() {
+    private static void displayLoginAlert(ResourceBundle rb) {
         Alert alertError = new Alert(Alert.AlertType.ERROR);
-        alertError.setTitle("Error");
-        alertError.setHeaderText("Wrong username or password.");
-        alertError.setContentText("Try logging again.");
+        alertError.setTitle(rb.getString("header"));
+        alertError.setHeaderText(rb.getString("headerText"));
+        alertError.setContentText(rb.getString("contentText"));
         alertError.showAndWait();
     }
 

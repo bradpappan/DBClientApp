@@ -2,6 +2,7 @@ package helper;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import model.appointmentModel;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,7 @@ public class reportsQuery {
      * @throws SQLException
      */
     public static ObservableList<String> contactAppointmentList(String contactId) throws SQLException {
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 

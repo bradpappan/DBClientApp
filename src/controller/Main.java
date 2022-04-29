@@ -22,12 +22,10 @@ public class Main extends Application {
      * @param args launches the program
      */
     public static void main(String[] args) {
+        Locale.setDefault(new Locale("fr"));
         JDBC.openConnection();
         launch(args);
 
-        Locale france = new Locale("fr", "FR");
-        ResourceBundle rb = ResourceBundle.getBundle("language/fr", Locale.getDefault());
-        if (Locale.getDefault().getLanguage().equals("fr"));
 
 
     }

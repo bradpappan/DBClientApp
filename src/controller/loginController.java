@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.appointmentModel;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,10 +25,13 @@ public class loginController implements Initializable {
 
     private ObservableList<appointmentModel> appointments = FXCollections.observableArrayList();
 
+    @FXML private Label welcomeLbl;
     @FXML private TextField usernameTf;
     @FXML private TextField passwordTf;
     @FXML private Label zoneIdLbl;
     @FXML private Button loginBtn;
+
+    private ResourceBundle rb = ResourceBundle.getBundle("language/login");
 
     /**
      * Initializes the login page, runs the query for the login attempt, and shows an alert for appointments with 15 minutes
@@ -38,6 +40,11 @@ public class loginController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        welcomeLbl.setText(rb.getString("welcomeLbl"));
+        usernameTf.setText(rb.getString("usernameTf"));
+        passwordTf.setText(rb.getString("passwordTf"));
+        loginBtn.setText(rb.getString("loginBtn"));
 
         try {
             appointments = loginPageQuery.appointmentWarning();
@@ -48,8 +55,11 @@ public class loginController implements Initializable {
         initializeZoneId();
         loginBtn.setOnAction(event -> {
             try {
-                boolean login = loginPageQuery.selectUser(event, usernameTf.getText(), passwordTf.getText());
+                boolean login = loginPageQuery.selectUser(event, usernameTf.getText(), passwordTf.getText(), rb);
                 loggerController.logger(usernameTf.getText(), login);
+                if (!login) {
+                    return;
+                }
 
                 if (appointments.isEmpty()) {
                     Alert alertError = new Alert(Alert.AlertType.ERROR);
