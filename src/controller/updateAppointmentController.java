@@ -167,7 +167,8 @@ public class updateAppointmentController implements Initializable {
         Timestamp end = Timestamp.valueOf((customFormatter.format(endLdt)));
 
         try {
-            appointmentsQuery.updateAppointment(appointmentId, title, description, location, type, start, end, customerId, userId, contactId);
+            //change order of parameters, should be the same as method call
+            appointmentsQuery.updateAppointment(appointmentId, title, description, location, type, start, end, contactId, customerId, userId);
             returnToAppointments(event);
         } catch (SQLException | IOException e) {
             e.printStackTrace();

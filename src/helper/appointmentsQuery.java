@@ -66,6 +66,8 @@ public class appointmentsQuery {
         ps.setInt(8, userId);
         ps.setInt(9, contactId);
         ps.setString(10, appointmentId);
+        System.out.println(customerId);
+        System.out.println(sql);
         ps.executeUpdate();
     }
 
@@ -195,6 +197,8 @@ public class appointmentsQuery {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
+
+
         ObservableList<appointmentModel> allAppointmentsObservableList = FXCollections.observableArrayList();
         String sql = "SELECT * FROM appointments WHERE ? BETWEEN Start AND End OR ? BETWEEN Start AND End OR ? < Start AND ? > End AND Customer_ID = ? AND Appointment_ID != ?";
         preparedStatement = JDBC.connection.prepareStatement(sql);
@@ -204,6 +208,9 @@ public class appointmentsQuery {
         preparedStatement.setTimestamp(4, end);
         preparedStatement.setString(5, customerId);
         preparedStatement.setString(6, testAppointmentId);
+        System.out.println(testAppointmentId);
+        System.out.println(start);
+        System.out.println(end);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             String appointmentId = resultSet.getString("Appointment_ID");
