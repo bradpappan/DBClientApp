@@ -41,6 +41,7 @@ public class loginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
         welcomeLbl.setText(rb.getString("welcomeLbl"));
         usernameTf.setText(rb.getString("usernameTf"));
         passwordTf.setText(rb.getString("passwordTf"));
@@ -86,6 +87,6 @@ public class loginController implements Initializable {
      * Sets the zone id label to system default
      */
     public void initializeZoneId() {
-        zoneIdLbl.setText(ZoneId.systemDefault().getId());
+        zoneIdLbl.setText(ZoneId.systemDefault().toString());
     }
 }

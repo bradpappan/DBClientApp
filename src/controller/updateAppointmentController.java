@@ -10,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.addAppointmentModel;
 import model.appointmentModel;
@@ -63,13 +60,19 @@ public class updateAppointmentController implements Initializable {
      * @return True if not overlapping another appointment, false if is
      * @throws SQLException
      */
-    private Boolean addAppointmentValidation (String customerId, LocalDateTime startLdt, LocalDateTime endLdt) throws SQLException {
+    private Boolean addAppointmentValidation (String customerId, LocalDateTime startLdt, LocalDateTime endLdt, String testAppointmentId) throws SQLException {
+
+        testAppointmentId = appointmentId;
+
+        if (startLdt.isAfter(endLdt)) {
+            return false;
+        }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         Timestamp start = Timestamp.valueOf(formatter.format(startLdt));
         Timestamp end = Timestamp.valueOf(formatter.format(endLdt));
 
-        overlapOb = appointmentsQuery.checkForOverlap(start, end, customerId);
+        overlapOb = appointmentsQuery.checkForOverlapOnUpdate(start, end, customerId, testAppointmentId);
 
         if (overlapOb.isEmpty()) {
             return true;
@@ -134,7 +137,7 @@ public class updateAppointmentController implements Initializable {
         int customerId = Integer.parseInt(customerIdTf.getText());
         int contactId = 0;
 
-        appointmentError = addAppointmentValidation(String.valueOf(customerId), startLdt, endLdt);
+        appointmentError = addAppointmentValidation(String.valueOf(customerId), startLdt, endLdt, appointmentId);
         closedHours = businessHours(startTime, endTime, startDate);
 
         for (addAppointmentModel item : contactsOb) {
@@ -222,6 +225,22 @@ public class updateAppointmentController implements Initializable {
         endTf.setText(localEndTime);
         startDp.setValue(selectedAppointment.getAppointmentStart().toLocalDateTime().toLocalDate());
         endDp.setValue(selectedAppointment.getAppointmentEnd().toLocalDateTime().toLocalDate());
+
+        startDp.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate startDp, boolean empty) {
+                super.updateItem(startDp, empty);
+                setDisable(empty || startDp.getDayOfWeek() == DayOfWeek.SATURDAY || startDp.getDayOfWeek() == DayOfWeek.SUNDAY || startDp.isBefore(LocalDate.now()));
+            }
+        });
+
+        endDp.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate endDp, boolean empty) {
+                super.updateItem(endDp, empty);
+                setDisable(empty || endDp.getDayOfWeek() == DayOfWeek.SATURDAY || endDp.getDayOfWeek() == DayOfWeek.SUNDAY || endDp.isBefore(LocalDate.now()));
+            }
+        });
     }
 
     /**

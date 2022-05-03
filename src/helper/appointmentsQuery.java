@@ -191,6 +191,39 @@ public class appointmentsQuery {
         return allAppointmentsObservableList;
     }
 
+    public static ObservableList<appointmentModel> checkForOverlapOnUpdate(Timestamp start, Timestamp end, String customerId, String testAppointmentId) throws SQLException {
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        ObservableList<appointmentModel> allAppointmentsObservableList = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM appointments WHERE ? BETWEEN Start AND End OR ? BETWEEN Start AND End OR ? < Start AND ? > End AND Customer_ID = ? AND Appointment_ID != ?";
+        preparedStatement = JDBC.connection.prepareStatement(sql);
+        preparedStatement.setTimestamp(1, start);
+        preparedStatement.setTimestamp(2, end);
+        preparedStatement.setTimestamp(3, start);
+        preparedStatement.setTimestamp(4, end);
+        preparedStatement.setString(5, customerId);
+        preparedStatement.setString(6, testAppointmentId);
+        resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            String appointmentId = resultSet.getString("Appointment_ID");
+            String appointmentTitle = resultSet.getString("Title");
+            String appointmentDescription = resultSet.getString("Description");
+            String appointmentLocation = resultSet.getString("Location");
+            String appointmentType = resultSet.getString("Type");
+            Timestamp appointmentStart = resultSet.getTimestamp("Start");
+            Timestamp appointmentEnd = resultSet.getTimestamp("End");
+            int appointmentCustomerId = resultSet.getInt("Customer_ID");
+            int appointmentUserId = resultSet.getInt("User_ID");
+            String appointmentContactId = resultSet.getString("Contact_ID");
+
+            appointmentModel appointmentResult = new appointmentModel(appointmentId, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart,
+                    appointmentEnd, appointmentCustomerId, appointmentUserId, appointmentContactId);
+            allAppointmentsObservableList.add(appointmentResult);
+        }
+        return allAppointmentsObservableList;
+    }
+
     /**
      * Deletes all appointments for a selected customerId
      * @param customerId passes in the customerId

@@ -19,11 +19,11 @@ public class Main extends Application {
 
 
     /**
-     *
+     * Sets the system default language in the program
      * @param args launches the program
      */
     public static void main(String[] args) {
-        Locale.setDefault(new Locale("fr"));
+        Locale.setDefault(Locale.getDefault());
         JDBC.openConnection();
         launch(args);
 

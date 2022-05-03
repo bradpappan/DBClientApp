@@ -27,7 +27,7 @@
       <Button fx:id="addCustomerHandler" layoutX="603.0" layoutY="427.0" mnemonicParsing="false" onAction="#addCustomer" text="Add Customer" />
       <Button fx:id="deleteCustomerHandler" layoutX="711.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteCustomer" text="Delete Customer" />
       <Button fx:id="editCustomerHandler" layoutX="826.0" layoutY="427.0" mnemonicParsing="false" onAction="#editCustomer" text="Edit Customer" />
-      <Button fx:id="appointmentBtn" layoutX="376.0" layoutY="427.0" mnemonicParsing="false" onAction="#openAppointmentsOnAction" prefHeight="25.0" prefWidth="160.0" text="Open appointments" />
+      <Button fx:id="appointmentBtn" layoutX="376.0" layoutY="427.0" mnemonicParsing="false" onAction="#openAppointmentsOnAction" prefHeight="25.0" prefWidth="213.0" text="Open appointments" />
       <Button layoutX="809.0" layoutY="33.0" mnemonicParsing="false" onAction="#openReports" text="Open Reports" />
    </children>
 </AnchorPane>

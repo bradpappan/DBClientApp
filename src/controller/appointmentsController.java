@@ -11,6 +11,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,9 +27,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.time.zone.ZoneRulesProvider;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -104,8 +106,19 @@ public class appointmentsController implements Initializable {
      */
     public void deleteAppointment() throws SQLException {
         selectedAppointment = appointmentSchedulesTable.getSelectionModel().getSelectedItem();
-        modifyAppointmentsQuery.deleteAppointment(selectedAppointment.getAppointmentId());
-        initTable();
+        if (selectedAppointment == null) {
+            displayCustomAlert("Part not selected", "Please select a part");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Attention");
+            alert.setContentText("Are you sure you want to delete Appointment ID: " + selectedAppointment.getAppointmentId() + " and Type: " + selectedAppointment.getAppointmentType());
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                modifyAppointmentsQuery.deleteAppointment(selectedAppointment.getAppointmentId());
+                initTable();
+            }
+        }
     }
 
     /**
@@ -214,6 +227,19 @@ public class appointmentsController implements Initializable {
         showAppointments(appointmentFilter);
 
     }
+
+        /**
+         * Custom alert that can be used to display an error
+         * @param header can input any message
+         * @param content can input any message
+         */
+        private static void displayCustomAlert(String header, String content) {
+            Alert alertError = new Alert(Alert.AlertType.ERROR);
+            alertError.setTitle("Error");
+            alertError.setHeaderText(header);
+            alertError.setContentText(content);
+            alertError.showAndWait();
+        }
 
     /**
      *
