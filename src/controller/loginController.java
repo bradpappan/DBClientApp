@@ -41,8 +41,6 @@ public class loginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //add if statement based on lang default here
-
         welcomeLbl.setText(rb.getString("welcomeLbl"));
         usernameTf.setText(rb.getString("usernameTf"));
         passwordTf.setText(rb.getString("passwordTf"));
