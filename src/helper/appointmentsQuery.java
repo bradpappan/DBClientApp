@@ -198,9 +198,8 @@ public class appointmentsQuery {
         ResultSet resultSet = null;
 
 
-
         ObservableList<appointmentModel> allAppointmentsObservableList = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM appointments WHERE ? BETWEEN Start AND End OR ? BETWEEN Start AND End OR ? < Start AND ? > End AND Customer_ID = ? AND Appointment_ID != ?";
+        String sql = "SELECT * FROM appointments WHERE (? BETWEEN Start AND End OR ? BETWEEN Start AND End OR ? < Start AND ? > End) AND (Customer_ID = ? AND Appointment_ID != ?)";
         preparedStatement = JDBC.connection.prepareStatement(sql);
         preparedStatement.setTimestamp(1, start);
         preparedStatement.setTimestamp(2, end);
