@@ -7,10 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
-
 /**
  * @author Brad Pappan
  * Main class
@@ -19,11 +15,11 @@ public class Main extends Application {
 
 
     /**
-     * Sets the system default language in the program
+     *
      * @param args launches the program
      */
     public static void main(String[] args) {
-        Locale.setDefault(Locale.getDefault());
+
         JDBC.openConnection();
         launch(args);
 

@@ -207,9 +207,6 @@ public class appointmentsQuery {
         preparedStatement.setTimestamp(4, end);
         preparedStatement.setString(5, customerId);
         preparedStatement.setString(6, testAppointmentId);
-        System.out.println(testAppointmentId);
-        System.out.println(start);
-        System.out.println(end);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             String appointmentId = resultSet.getString("Appointment_ID");
