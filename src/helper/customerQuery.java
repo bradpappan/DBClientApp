@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class customerQuery {
 
     /**
-     *
+     * gets the divisions
      * @return the divisions
      * @throws SQLException
      */

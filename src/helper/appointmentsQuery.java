@@ -72,7 +72,7 @@ public class appointmentsQuery {
     }
 
     /**
-     *
+     * Gets all contacts
      * @return gets the contact information
      * @throws SQLException
      */
@@ -95,7 +95,7 @@ public class appointmentsQuery {
     }
 
     /**
-     *
+     * Selects appointment based on appointmentId
      * @param appointmentId passes in the appointmentId
      * @return the selected appointment to edit
      * @throws SQLException
@@ -134,7 +134,7 @@ public class appointmentsQuery {
 }
 
     /**
-     *
+     * Pulls the contact name
      * @param contactId passes in the contactId
      * @return gets the contact name
      * @throws SQLException
@@ -154,7 +154,7 @@ public class appointmentsQuery {
     }
 
     /**
-     *
+     * Checks the database for conflicting appointments
      * @param start passes in the start time
      * @param end passes in the end time
      * @param customerId passes in the customerId
@@ -193,6 +193,15 @@ public class appointmentsQuery {
         return allAppointmentsObservableList;
     }
 
+    /**
+     * Checks the database for conflicting appointments and excludes the selected appointmentId
+     * @param start passes in the start time
+     * @param end passes in the end time
+     * @param customerId passes in the customerId
+     * @param testAppointmentId passes in the selected appointmentId
+     * @return any overlapping appointments
+     * @throws SQLException
+     */
     public static ObservableList<appointmentModel> checkForOverlapOnUpdate(Timestamp start, Timestamp end, String customerId, String testAppointmentId) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -240,7 +249,7 @@ public class appointmentsQuery {
     }
 
     /**
-     *
+     * pulls the current weeks appointments
      * @param start passes in a start time
      * @param end passes in a end time
      * @return all appointments within 7 days

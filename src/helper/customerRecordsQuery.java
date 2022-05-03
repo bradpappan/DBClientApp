@@ -37,7 +37,7 @@ public class customerRecordsQuery {
     }
 
     /**
-     *
+     * gets all customers
      * @return Gets all the information from the customers table
      * @throws SQLException
      */
@@ -64,7 +64,7 @@ public class customerRecordsQuery {
     }
 
     /**
-     *
+     * gets a customer based on the customerId
      * @param customerId passes in the customerId
      * @return the selected customer to be edited
      * @throws SQLException

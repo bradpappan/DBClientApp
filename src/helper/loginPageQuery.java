@@ -27,7 +27,7 @@ public class loginPageQuery {
     private ResourceBundle rb = ResourceBundle.getBundle("language/login");
 
     /**
-     *
+     * select user credentials to verify login
      * @param event passes in the event
      * @param username passes in the username
      * @param password passes in the password
@@ -93,7 +93,7 @@ public class loginPageQuery {
     }
 
     /**
-     *
+     * populates observable list with appointments within 15 minutes
      * @return appointments within 15 minutes of login
      * @throws SQLException
      */
@@ -104,8 +104,6 @@ public class loginPageQuery {
         ObservableList<appointmentModel> appointmentWarningOb = FXCollections.observableArrayList();
         String sql = "SELECT * FROM appointments WHERE Start BETWEEN now() AND date_add(now(), INTERVAL 15 MINUTE);";
         preparedStatement = JDBC.connection.prepareStatement(sql);
-        //preparedStatement.setTimestamp(1, startTime);
-        //preparedStatement.setTimestamp(2, endTime);
         resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             String appointmentId = resultSet.getString("Appointment_ID");
