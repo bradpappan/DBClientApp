@@ -31,7 +31,7 @@ public class loginController implements Initializable {
     @FXML private Label zoneIdLbl;
     @FXML private Button loginBtn;
 
-    private ResourceBundle rb = ResourceBundle.getBundle("language/login");
+    private ResourceBundle rb = ResourceBundle.getBundle("language/login", Locale.getDefault());
 
     /**
      * Initializes the login page, runs the query for the login attempt, and shows an alert for appointments with 15 minutes
@@ -42,6 +42,7 @@ public class loginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         //add if statement based on lang default here
+
         welcomeLbl.setText(rb.getString("welcomeLbl"));
         usernameTf.setText(rb.getString("usernameTf"));
         passwordTf.setText(rb.getString("passwordTf"));
